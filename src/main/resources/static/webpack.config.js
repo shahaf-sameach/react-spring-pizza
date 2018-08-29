@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    context: path.join(__dirname, "src"),
+    context: __dirname,
     devtool: debug ? "inline-sourcemap" : false,
     entry: "./js/progress_bar.js",
     module: {
@@ -20,7 +20,7 @@ module.exports = {
         ]
     },
     output: {
-        path: __dirname + "/src/",
+        path: __dirname,
         filename: "progress_bar.min.js"
     },
     plugins: debug ? [] : [
