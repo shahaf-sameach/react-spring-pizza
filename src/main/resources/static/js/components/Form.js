@@ -1,7 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
-
-const reactFormContainer = document.querySelector('.react-form-container')
 
 class ReactFormLabel extends React.Component {
     constructor(props) {
@@ -15,7 +12,7 @@ class ReactFormLabel extends React.Component {
     }
 }
 
-class ReactForm extends React.Component {
+export default class ReactForm extends React.Component {
     constructor(props) {
         super(props)
 
@@ -45,8 +42,8 @@ class ReactForm extends React.Component {
             formLocation: this.state.location
         }
 
-        axios.post('/user', {
-            type: this.state,type,
+        axios.post('localhost:8090/order/create', {
+            type: this.state.type,
             location: this.state.location
         })
         .then(function (response) {
@@ -70,20 +67,20 @@ class ReactForm extends React.Component {
         <fieldset className='form-group'>
             <ReactFormLabel htmlFor='formType' title='Type:' />
             <select value={this.state.type} onChange={this.handleChange}>
-                <option value="Margarita">Margarita</option>
-                <option value="Pomodoro">Pomodoro</option>
-                <option value="Peperoni">Peperoni</option>
-                <option value="White">White</option>
+                <option value="0">Margarita</option>
+                <option value="1">Pomodoro</option>
+                <option value="2">Peperoni</option>
+                <option value="3">White</option>
             </select>
         </fieldset>
 
         <fieldset className='form-group'>
             <ReactFormLabel htmlFor='formLocation' title='Location:' />
             <select value={this.state.location} onChange={this.handleChange}>
-                <option value="Nordau">Nordau</option>
-                <option value="Allenby">Allenby</option>
-                <option value="Dizengoff">Dizengoff</option>
-                <option value="Bugrashov">Bugrashov</option>
+                <option value="0">Nordau</option>
+                <option value="1">Allenby</option>
+                <option value="2">Dizengoff</option>
+                <option value="3">Bugrashov</option>
             </select>
         </fieldset>
 
@@ -95,4 +92,3 @@ class ReactForm extends React.Component {
     }
 }
 
-ReactDOM.render(<ReactForm />, reactFormContainer)

@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = {
     context: __dirname,
     devtool: debug ? "inline-sourcemap" : false,
-    entry: "./js/progress_bar.js",
+    entry: "./js/client.js",
     module: {
         loaders: [
             {
@@ -21,7 +21,7 @@ module.exports = {
     },
     output: {
         path: __dirname,
-        filename: "progress_bar.min.js"
+        filename: "client.min.js"
     },
     plugins: debug ? [] : [
         new webpack.optimize.DedupePlugin(),
