@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 class ReactFormLabel extends React.Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class ReactFormLabel extends React.Component {
     render() {
         return(
             <label htmlFor={this.props.htmlFor}>{this.props.title}</label>
-    )
+        )
     }
 }
 
@@ -27,9 +28,7 @@ export default class ReactForm extends React.Component {
 
     handleChange = (e) => {
         let newState = {}
-
         newState[e.target.name] = e.target.value
-
         this.setState(newState)
     }
 
@@ -62,33 +61,33 @@ export default class ReactForm extends React.Component {
     render() {
         return(
             <form className='react-form' onSubmit={this.handleSubmit}>
-    <h1>Say Hi!</h1>
+                <h1>Say Hi!</h1>
 
-        <fieldset className='form-group'>
-            <ReactFormLabel htmlFor='formType' title='Type:' />
-            <select value={this.state.type} onChange={this.handleChange}>
-                <option value="0">Margarita</option>
-                <option value="1">Pomodoro</option>
-                <option value="2">Peperoni</option>
-                <option value="3">White</option>
-            </select>
-        </fieldset>
+                <fieldset className='form-group'>
+                    <ReactFormLabel htmlFor='formType' title='Type:' />
+                    <select value={this.state.type} onChange={this.handleChange}>
+                        <option value="0">Margarita</option>
+                        <option value="1">Pomodoro</option>
+                        <option value="2">Peperoni</option>
+                        <option value="3">White</option>
+                    </select>
+                </fieldset>
 
-        <fieldset className='form-group'>
-            <ReactFormLabel htmlFor='formLocation' title='Location:' />
-            <select value={this.state.location} onChange={this.handleChange}>
-                <option value="0">Nordau</option>
-                <option value="1">Allenby</option>
-                <option value="2">Dizengoff</option>
-                <option value="3">Bugrashov</option>
-            </select>
-        </fieldset>
+                <fieldset className='form-group'>
+                    <ReactFormLabel htmlFor='formLocation' title='Location:' />
+                    <select value={this.state.location} onChange={this.handleChange}>
+                        <option value="0">Nordau</option>
+                        <option value="1">Allenby</option>
+                        <option value="2">Dizengoff</option>
+                        <option value="3">Bugrashov</option>
+                    </select>
+                </fieldset>
 
-        <div className='form-group'>
-            <input id='formButton' className='btn' type='submit' placeholder='Send message' />
-        </div>
-        </form>
-    )
+                <div className='form-group'>
+                    <input id='formButton' className='btn' type='submit' placeholder='Send message' />
+                </div>
+            </form>
+        )
     }
 }
 

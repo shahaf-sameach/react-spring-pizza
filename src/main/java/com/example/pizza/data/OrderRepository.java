@@ -16,8 +16,8 @@ public class OrderRepository {
         Order ord = new Order(order);
         ord.setId(lastId);
 
-        if (orders.containsKey(ord.getId()))
-            return null;
+        while (orders.containsKey(ord.getId()))
+            ord.setId(++lastId);
 
         orders.put(ord.getId(), ord);
         lastId += 1;
