@@ -6,6 +6,18 @@ module.exports = {
     context: __dirname,
     devtool: debug ? "inline-sourcemap" : false,
     entry: "./js/client.js",
+    devServer: {
+        historyApiFallback: true,
+        contentBase: path.resolve(__dirname),
+        compress: true,
+        hot: true,
+        port: 9000,
+        // proxy: {
+        //     '/': 'http://localhost:8080',
+        //     changeOrigin: true,
+        //     context: () => true
+        // }
+    },
     module: {
         loaders: [
             {

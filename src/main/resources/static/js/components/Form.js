@@ -41,7 +41,7 @@ export default class ReactForm extends React.Component {
             formLocation: this.state.location
         }
 
-        axios.post('localhost:8090/order/create', {
+        axios.post('http://localhot:8080/order/create', {
             type: this.state.type,
             location: this.state.location
         })
