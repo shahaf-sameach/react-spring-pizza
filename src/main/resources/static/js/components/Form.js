@@ -33,18 +33,10 @@ export default class ReactForm extends React.Component {
     }
 
 
-    handleSubmit = (e, message) => {
-        e.preventDefault()
-
-        let formData = {
-            formType: this.state.type,
-            formLocation: this.state.location
-        }
-
-        axios.post('localhost:8090/order/create', {
-            type: this.state.type,
-            location: this.state.location
-        })
+    async handleSubmit = (e, message) => {
+        e.preventDefault();
+        let { type, location } = this.state;
+        axios.post('localhost:8090/order/create', {type, location})
         .then(function (response) {
             console.log(response);
         })
