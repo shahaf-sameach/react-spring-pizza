@@ -1,5 +1,7 @@
 import React from "react";
 import { ProgressBar } from 'react-bootstrap';
+import axios from "axios";
+
 
 export default class ReactProgressBar extends React.Component {
     constructor(props) {
@@ -15,6 +17,8 @@ export default class ReactProgressBar extends React.Component {
                 {complete: 0, active: "active", striped: "stripped", style: "warning"},
             delivering:
                 {complete: 0, active: "active", striped: "stripped", style: "warning"}};
+        this.state.order_id = props.order_id
+        this.state.pull = true
     }
 
     preparingBar() {
@@ -28,6 +32,7 @@ export default class ReactProgressBar extends React.Component {
     }
 
     bakingBar() {
+        this.preparingBar()
         const preparing = this.state.preparing;
         preparing.active = "";
         preparing.style = "success";
@@ -38,6 +43,7 @@ export default class ReactProgressBar extends React.Component {
     }
 
     packagingBar() {
+        this.bakingBar()
         const baking = this.state.baking;
         baking.active = "";
         baking.style = "success";
@@ -48,6 +54,7 @@ export default class ReactProgressBar extends React.Component {
     }
 
     deliveringBar() {
+        this.packagingBar()
         const packaging = this.state.packaging;
         packaging.active = "";
         packaging.style = "success";
@@ -58,18 +65,63 @@ export default class ReactProgressBar extends React.Component {
     }
 
     deliveredBar() {
+        this.deliveringBar()
         const delivering = this.state.delivering;
         delivering.active = "";
         delivering.style = "success";
         this.setState({delivering});
     }
 
+    stopPulling() {
+        this.state.pull = false
+    }
+
+    done () {
+        this.deliveredBar()
+        this.stopPulling()
+        this.props.handleOrderDeliverd()
+    }
+
+    getStatus () {
+        var that = this
+        if (this.state.pull) {
+            axios.get('http://localhost:8080/order/get', {params: {id: this.state.order_id}})
+                .then(function (response) {
+                    console.log(response);
+                    switch (response.data.state) {
+                        case 'Preparing':
+                            that.preparingBar()
+                            break
+                        case 'Baking':
+                            that.bakingBar()
+                            break
+                        case 'Packaging':
+                            that.packagingBar()
+                            break
+                        case 'Delivering':
+                            that.deliveringBar()
+                            break
+                        case 'Delivered':
+                            that.done()
+                            break
+                    }
+                    console.log(response.data.state)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(() => this.getStatus(), 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
     render() {
-        setTimeout(() => { this.preparingBar() }, 2000);
-        setTimeout(() => { this.bakingBar() }, 4000);
-        setTimeout(() => { this.packagingBar() }, 6000);
-        setTimeout(() => { this.deliveringBar() }, 8000);
-        setTimeout(() => { this.deliveredBar() }, 10000);
         return(
             <div>
                 <ProgressBar>

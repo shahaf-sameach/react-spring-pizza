@@ -18,9 +18,11 @@ export default class ReactForm extends React.Component {
         super(props)
 
         this.state = {
-            type: '',
-            location: ''
+            type: '0',
+            location: '0'
         }
+        this.state.disabled = props.disable
+
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -33,37 +35,30 @@ export default class ReactForm extends React.Component {
     }
 
 
-    handleSubmit = (e, message) => {
-        e.preventDefault()
 
-        let formData = {
-            formType: this.state.type,
-            formLocation: this.state.location
-        }
-
-        axios.post('http://localhot:8080/order/create', {
-            type: this.state.type,
-            location: this.state.location
-        })
+    handleSubmit = (e) => {
+        e.preventDefault();
+        let { type, location } = this.state;
+        console.log(this.state)
+        var that = this;
+        axios.post('http://localhost:8080/order/create', {type, location})
         .then(function (response) {
             console.log(response);
+            console.log(response.data.id)
+            that.props.handleFormSubmit(response.data.id)
+            that.setState({disabled: true})
         })
         .catch(function (error) {
             console.log(error);
         });
-
-        this.setState({
-            type: '',
-            location: ''
-        })
     }
 
     render() {
         return(
             <form className='react-form' onSubmit={this.handleSubmit}>
-                <h1>Say Hi!</h1>
+                <h2>Place your Order</h2>
 
-                <fieldset className='form-group'>
+                <fieldset disabled={this.state.disabled} className='form-group'>
                     <ReactFormLabel htmlFor='formType' title='Type:' />
                     <select value={this.state.type} onChange={this.handleChange}>
                         <option value="0">Margarita</option>
@@ -73,7 +68,7 @@ export default class ReactForm extends React.Component {
                     </select>
                 </fieldset>
 
-                <fieldset className='form-group'>
+                <fieldset disabled={this.state.disabled} className='form-group'>
                     <ReactFormLabel htmlFor='formLocation' title='Location:' />
                     <select value={this.state.location} onChange={this.handleChange}>
                         <option value="0">Nordau</option>
@@ -84,7 +79,7 @@ export default class ReactForm extends React.Component {
                 </fieldset>
 
                 <div className='form-group'>
-                    <input id='formButton' className='btn' type='submit' placeholder='Send message' />
+                    <input disabled={this.state.disabled} id='formButton' className='btn' type='submit' placeholder='Send message' />
                 </div>
             </form>
         )
