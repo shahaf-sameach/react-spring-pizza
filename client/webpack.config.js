@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = {
     context: __dirname,
     devtool: debug ? "inline-sourcemap" : false,
-    entry: "./js/client.js",
+    entry: "./js/index.js",
     devServer: {
         historyApiFallback: true,
         contentBase: path.resolve(__dirname),
@@ -13,7 +13,7 @@ module.exports = {
         hot: true,
         port: 9000,
         // proxy: {
-        //     '/': 'http://localhost:8080',
+        //     '/api': 'http://localhost:8080',
         //     changeOrigin: true,
         //     context: () => true
         // }
@@ -33,7 +33,7 @@ module.exports = {
     },
     output: {
         path: __dirname,
-        filename: "client.min.js"
+        filename: "index.min.js"
     },
     plugins: debug ? [] : [
         new webpack.optimize.DedupePlugin(),

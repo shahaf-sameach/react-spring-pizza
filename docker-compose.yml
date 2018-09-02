@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web-app:
+    image: java:8-jdk-alpine
+    volumes:
+      - ./target:/code
+    ports:
+      - "8080:8080"
+    entrypoint:
+      java -jar /code/pizza-0.0.1-SNAPSHOT.jar

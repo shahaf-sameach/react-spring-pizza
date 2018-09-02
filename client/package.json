@@ -17,14 +17,16 @@
     "react": "^0.14.6",
     "react-bootstrap": "^0.32.3",
     "react-dom": "^0.14.6",
+    "react-router-dom": "^4.3.1",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.1"
   },
   "devDependencies": {},
   "scripts": {
-    "dev": "webpack-dev-server --content-base --inline --hot",
+    "dev": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production && npm run copy",
+    "copy" : "cp index.min.js ../src/main/resources/static/ && cp index.html ../src/main/resources/static/"
   },
   "author": "",
   "license": "ISC"

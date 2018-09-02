@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+
 
 class ReactFormLabel extends React.Component {
     constructor(props) {
@@ -13,6 +15,7 @@ class ReactFormLabel extends React.Component {
     }
 }
 
+
 export default class ReactForm extends React.Component {
     constructor(props) {
         super(props)
@@ -21,8 +24,6 @@ export default class ReactForm extends React.Component {
             type: '0',
             location: '0'
         }
-        this.state.disabled = props.disable
-
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -31,7 +32,7 @@ export default class ReactForm extends React.Component {
     handleChange = (e) => {
         let newState = {}
         newState[e.target.name] = e.target.value
-        this.setState(newState)
+        this.setState(newState, () => console.log(this.state))
     }
 
 
@@ -41,12 +42,14 @@ export default class ReactForm extends React.Component {
         let { type, location } = this.state;
         console.log(this.state)
         var that = this;
-        axios.post('http://localhost:8080/order/create', {type, location})
+        axios.post('http://localhost:8080/api/order/create', {type, location})
         .then(function (response) {
-            console.log(response);
-            console.log(response.data.id)
-            that.props.handleFormSubmit(response.data.id)
-            that.setState({disabled: true})
+            if (response.status == 200) {
+                that.props.handleFormSubmit(response.data.id)
+                that.setState({disabled: true})
+            } else {
+                console.log('redirect');
+            }
         })
         .catch(function (error) {
             console.log(error);
@@ -58,29 +61,43 @@ export default class ReactForm extends React.Component {
             <form className='react-form' onSubmit={this.handleSubmit}>
                 <h2>Place your Order</h2>
 
-                <fieldset disabled={this.state.disabled} className='form-group'>
-                    <ReactFormLabel htmlFor='formType' title='Type:' />
-                    <select value={this.state.type} onChange={this.handleChange}>
+                <FormGroup controlId="type" bsSize="small">
+                    <ControlLabel>Type</ControlLabel>
+                    <FormControl
+                        componentClass="select"
+                        name="type"
+                        value={this.state.type}
+                        disabled={this.props.disable}
+                        onChange={this.handleChange}>
                         <option value="0">Margarita</option>
                         <option value="1">Pomodoro</option>
                         <option value="2">Peperoni</option>
                         <option value="3">White</option>
-                    </select>
-                </fieldset>
+                    </FormControl>
+                </FormGroup>
 
-                <fieldset disabled={this.state.disabled} className='form-group'>
-                    <ReactFormLabel htmlFor='formLocation' title='Location:' />
-                    <select value={this.state.location} onChange={this.handleChange}>
+                <FormGroup controlId="location" bsSize="small">
+                    <ControlLabel>Location</ControlLabel>
+                    <FormControl
+                        componentClass="select"
+                        name="location"
+                        value={this.state.location}
+                        disabled={this.props.disable}
+                        onChange={this.handleChange}>
                         <option value="0">Nordau</option>
                         <option value="1">Allenby</option>
                         <option value="2">Dizengoff</option>
                         <option value="3">Bugrashov</option>
-                    </select>
-                </fieldset>
+                    </FormControl>
+                </FormGroup>
 
-                <div className='form-group'>
-                    <input disabled={this.state.disabled} id='formButton' className='btn' type='submit' placeholder='Send message' />
-                </div>
+                <Button
+                    disabled={this.props.disable}
+                    bsSize="small"
+                    type="submit"
+                    placeholder='Send message'>
+                    Send message
+                </Button>
             </form>
         )
     }

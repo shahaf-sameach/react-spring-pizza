@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import Form from "./Form";
 import ProgrssBar from "./ProgressBar";
-import axios from "axios";
-import _ from "lodash";
+import {Button} from "react-bootstrap";
 
 export default class Order extends Component {
     constructor(props) {
@@ -12,6 +11,16 @@ export default class Order extends Component {
             bar: false,
             formDisable: false
         }
+
+        this.toggleForm = this.toggleForm.bind(this);
+    }
+
+    toggleForm() {
+        this.setState(state => ({
+            formDisable: !state.formDisable,
+            bar: false,
+            new_order: false
+        }));
     }
 
     handleFormSubmit(order_id) {
@@ -38,12 +47,15 @@ export default class Order extends Component {
                 { this.state.bar ?
                 <div>
                     <ProgrssBar order_id={this.state.order_id} handleOrderDeliverd={this.handleOrderDeliverd.bind(this)}/>
-                </div> : <div></div>
+                </div> : null
                 }
                 { this.state.new_order ?
-                    <button onClick={this.newOrderClick.bind(this)}>
+                    <Button
+                        disabled={this.props.disable}
+                        bsSize="small"
+                        onClick={this.toggleForm.bind(this)}>
                         New Order
-                    </button> : <div></div>
+                    </Button> : null
                 }
             </div>
         );
