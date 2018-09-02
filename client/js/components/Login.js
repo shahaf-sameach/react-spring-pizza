@@ -8,7 +8,8 @@ export default class Login extends React.Component {
 
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            showWrongCredsMessage: false
         };
     }
 
@@ -20,11 +21,17 @@ export default class Login extends React.Component {
         this.setState({
             [event.target.id]: event.target.value
         });
+        this.setState({showWrongCredsMessage: false})
     }
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.history.push("/order");
+        if (this.state.username == "user" && this.state.password == "1234") {
+            this.props.history.push("/order");
+        }
+        else {
+            this.setState({showWrongCredsMessage: true})
+        }
     }
 
 
@@ -54,6 +61,9 @@ export default class Login extends React.Component {
                         Login
                     </Button>
                 </form>
+                { this.state.showWrongCredsMessage ?
+                    "Invalid creds" : null
+                }
             </div>
         );
     }
