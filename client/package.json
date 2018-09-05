@@ -17,7 +17,9 @@
     "react": "^0.14.6",
     "react-bootstrap": "^0.32.3",
     "react-dom": "^0.14.6",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.1"
   },
@@ -26,7 +28,7 @@
     "dev": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production && npm run copy",
-    "copy" : "cp index.min.js ../src/main/resources/static/ && cp index.html ../src/main/resources/static/"
+    "copy": "cp index.min.js ../src/main/resources/static/ && cp index.html ../src/main/resources/static/"
   },
   "author": "",
   "license": "ISC"

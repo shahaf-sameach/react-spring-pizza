@@ -1,13 +1,9 @@
 import React from "react";
 import { Route } from 'react-router-dom';
+import Order from "./order/Order";
+import LoginComponent from "./login/login.component";
 
-
-import Footer from "./Footer";
-import Header from "./Header";
-import Order from "./Order";
-import Login from "./Login";
-
-export default class Layout extends React.Component {
+export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -22,14 +18,13 @@ export default class Layout extends React.Component {
     render() {
         return (
             <div>
-                <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
                 <Route path="/order" component={Order}/>
-                <Route exact path="/" component={Login}/>
+                <Route exact path="/" component={LoginComponent}/>
                 {/*<Route path="/" component={Login}>*/}
                     {/*<IndexRedirect to="/login" />*/}
                     {/*<Route path="/order" component={Order} />*/}
                 {/*</Route>*/}
-                <Footer />
+                <footer></footer>
             </div>
     );
     }

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import Form from "./Form";
-import ProgrssBar from "./ProgressBar";
+import Form from "../form/Form";
+import ProgrssBar from "../progressBar/ProgressBar.bkup";
 import {Button} from "react-bootstrap";
 
 export default class Order extends Component {

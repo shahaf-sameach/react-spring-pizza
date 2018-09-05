@@ -1,11 +1,16 @@
-import React from "react";
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from "react-router-dom";
-import Layout from "./components/Layout";
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import {store} from './store';
+import { BrowserRouter, Route } from 'react-router-dom';
+import App from "./components/App";
 
-
-const app = document.getElementById('app');
-
-ReactDOM.render( <Router><Layout /></Router>, app);
-
+render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <Route path="/" component={App} />
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById('app')
+);
 
