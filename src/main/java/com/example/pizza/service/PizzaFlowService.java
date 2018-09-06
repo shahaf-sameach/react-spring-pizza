@@ -43,13 +43,13 @@ public class PizzaFlowService {
                 case Preparing:
                     if (diff > preparingTime) {
                         order.setState(Baking);
-                        bakingTaskExecutor.execute(new BakingThread(order, order.getType().getDuration()));
+                        bakingTaskExecutor.execute(new Worker(order, order.getType().getDuration()));
                     }
                     break;
                 case Packaging:
                     if (diff > packagingTime) {
                         order.setState(Delivering);
-                        deliveringTaskExecutor.execute(new BakingThread(order, order.getLocation().getDuration()));
+                        deliveringTaskExecutor.execute(new Worker(order, order.getLocation().getDuration()));
                     }
                     break;
             }
