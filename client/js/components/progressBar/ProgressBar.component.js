@@ -4,7 +4,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {updateProgresBar} from "./progressBar.actions";
 import {UPDATE_PROCESSING, UPDATE_PREPERING, UPDATE_BAKING, UPDATE_PACKAGING, UPDATE_DELIVERING, UPDATE_DELIVERED} from './progressBar.actions'
-import
+
 
 class ReactProgressBar extends React.Component {
     constructor(props) {
@@ -146,7 +146,7 @@ class ReactProgressBar extends React.Component {
                     <ProgressBar active={this.state.delivering.active} striped bsStyle={this.state.delivering.style} now={this.state.delivering.complete} key={5} label={this.state.delivering.label} />
                 </ProgressBar>
             </div>
-    )
+        )
     }
 }
 

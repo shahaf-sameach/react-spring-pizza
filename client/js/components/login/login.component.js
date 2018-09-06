@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { push } from 'connected-react-router'
 import {Button, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import {updatePassword, updateUsername} from './login.actions';
 
@@ -22,11 +23,10 @@ class LoginComponent extends React.Component {
         debugger
         if (this.props.loginView.username == "user" &&
             this.props.loginView.password == "1234") {
-            this.props.history.push("/order");
+            this.props.changePage()
         }
         else {
-            // todo: move to redux
-            // this.setState({showWrongCredsMessage: true})
+            this.setState({showWrongCredsMessage: true})
         }
     }
 
@@ -78,6 +78,10 @@ const mapDispatchToProps = dispatch => {
 
         updatePassword: (e) => {
             dispatch(updatePassword(e.target.value));
+        },
+
+        changePage: () => {
+            dispatch(() => push('/order'))
         }
     };
 };

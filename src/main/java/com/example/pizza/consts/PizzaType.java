@@ -15,9 +15,9 @@ public enum PizzaType {
         return this.duration;
     }
 
-    @JsonValue
-    public int toValue() {
-        return ordinal();
-    }
+//    @JsonValue
+//    public int toValue() {
+//        return ordinal();
+//    }
 
 }
