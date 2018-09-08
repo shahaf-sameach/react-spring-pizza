@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = {
     context: __dirname,
     devtool: debug ? "inline-sourcemap" : false,
-    entry: "./js/index.js",
+    entry: "./src/index.js",
     devServer: {
         historyApiFallback: true,
         contentBase: path.resolve(__dirname),
