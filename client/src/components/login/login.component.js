@@ -20,7 +20,7 @@ class LoginComponent extends React.Component {
     }
 
     handleSubmit = () => {
-        debugger
+        // debugger
         if (this.props.loginView.username == "user" &&
             this.props.loginView.password == "1234") {
             this.props.changePage()
@@ -81,7 +81,7 @@ const mapDispatchToProps = dispatch => {
         },
 
         changePage: () => {
-            dispatch(() => push('/order'))
+            dispatch(push('/order'))
         }
     };
 };

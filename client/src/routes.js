@@ -1,19 +1,14 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
-import Home from './components/Home'
-import Hello from './components/Hello'
-import Counter from './components/Counter'
-import NoMatch from './components/NoMatch'
-import NavBar from './components/NavBar'
+import LoginComponent from './components/login/login.component'
+import Order from './components/order/Order'
 
 const routes = (
     <div>
-        <NavBar />
         <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/hello" component={Hello} />
-            <Route path="/counter" component={Counter} />
-            <Route component={NoMatch} />
+            <Route exact path="/" component={LoginComponent} />
+            <Route path="/order" component={Order} />
+            <Route component={LoginComponent} />
         </Switch>
     </div>
 )
