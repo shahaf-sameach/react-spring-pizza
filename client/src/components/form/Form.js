@@ -3,19 +3,6 @@ import axios from "axios";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 
-class ReactFormLabel extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
-    render() {
-        return(
-            <label htmlFor={this.props.htmlFor}>{this.props.title}</label>
-        )
-    }
-}
-
-
 export default class ReactForm extends React.Component {
     constructor(props) {
         super(props)
@@ -96,7 +83,7 @@ export default class ReactForm extends React.Component {
                     bsSize="small"
                     type="submit"
                     placeholder='Send message'>
-                    Send message
+                    Place Order
                 </Button>
             </form>
         )

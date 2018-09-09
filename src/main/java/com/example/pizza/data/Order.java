@@ -3,6 +3,7 @@ package com.example.pizza.data;
 import com.example.pizza.consts.Location;
 import com.example.pizza.consts.OrderState;
 import com.example.pizza.consts.PizzaType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
 
@@ -12,6 +13,8 @@ public class Order {
     private Location location;
     private PizzaType type;
     private OrderState state;
+
+    @JsonIgnore
     private long stateTimeStamp;
 
     public Order() {

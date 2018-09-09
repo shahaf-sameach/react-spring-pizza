@@ -15,6 +15,17 @@ const actionMap = {
 };
 
 export const reducer = (state = initialState, action) => {
+    switch (action.type){
+        case UPDATE_PREPERING:
+        case UPDATE_PACKAGING:
+        case UPDATE_PACKAGING:
+        case UPDATE_DELIVERING:
+        case UPDATE_DELIVERED:
+            return updateProgressBar(state, action)
+            break
+        default:
+            return state
+    }
     const act = actionMap[action.type];
     return act ? act(state, action) : state;
 }

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Form from "../form/Form";
-import ProgrssBar from "../progressBar/ProgressBar.bkup";
+import ProgrssBar from "../progressBar/ProgressBar.component";
 import {Button} from "react-bootstrap";
 
 class Order extends Component {
@@ -45,9 +45,10 @@ class Order extends Component {
             <div>
                 <Form handleFormSubmit={this.handleFormSubmit.bind(this)} disable={this.state.formDisable}/>
                 { this.state.bar ?
-                <div>
-                    <ProgrssBar order_id={this.state.order_id} handleOrderDeliverd={this.handleOrderDeliverd.bind(this)}/>
-                </div> : null
+                    <ProgrssBar
+                        order_id={this.state.order_id}
+                        handleOrderDeliverd={this.handleOrderDeliverd.bind(this)}/>
+                    : null
                 }
                 { this.state.new_order ?
                     <Button
@@ -58,7 +59,7 @@ class Order extends Component {
                     </Button> : null
                 }
             </div>
-        );
+        )
     }
 }
 

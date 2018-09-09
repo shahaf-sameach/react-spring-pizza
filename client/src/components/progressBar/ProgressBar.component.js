@@ -4,6 +4,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {updateProgresBar} from "./progressBar.actions";
 import {UPDATE_PROCESSING, UPDATE_PREPERING, UPDATE_BAKING, UPDATE_PACKAGING, UPDATE_DELIVERING, UPDATE_DELIVERED} from './progressBar.actions'
+import routes from "../../routes";
 
 
 class ReactProgressBar extends React.Component {
@@ -11,15 +12,15 @@ class ReactProgressBar extends React.Component {
         super(props);
         this.state = {
             processing:
-                {complete: 20, active: "active", striped: "stripped", style: "warning"},
+                {complete: 20, active: true, striped: "stripped", style: "warning"},
             preparing:
-                {complete: 0, active: "active", striped: "stripped", style: "warning"},
+                {complete: 0, active: true, striped: "stripped", style: "warning"},
             baking:
-                {complete: 0, active: "active", striped: "stripped", style: "warning"},
+                {complete: 0, active: true, striped: "stripped", style: "warning"},
             packaging:
-                {complete: 0, active: "active", striped: "stripped", style: "warning"},
+                {complete: 0, active: true, striped: "stripped", style: "warning"},
             delivering:
-                {complete: 0, active: "active", striped: "stripped", style: "warning"}};
+                {complete: 0, active: true, striped: "stripped", style: "warning"}};
         this.state.order_id = props.order_id
         this.state.pull = true
         this.state.processing.label = "processing"
@@ -90,10 +91,6 @@ class ReactProgressBar extends React.Component {
         this.props.handleOrderDeliverd()
     }
 
-    updateProgress() {
-
-    }
-
     getStatus () {
         var that = this
         if (this.state.pull) {
@@ -144,11 +141,13 @@ class ReactProgressBar extends React.Component {
                     <ProgressBar active={this.state.baking.active} striped bsStyle={this.state.baking.style} now={this.state.baking.complete} key={3} label={this.state.baking.label} />
                     <ProgressBar active={this.state.packaging.active} striped bsStyle={this.state.packaging.style} now={this.state.packaging.complete} key={4} label={this.state.packaging.label} />
                     <ProgressBar active={this.state.delivering.active} striped bsStyle={this.state.delivering.style} now={this.state.delivering.complete} key={5} label={this.state.delivering.label} />
+                    <ProgressBarSegment label={"prepering"} />
                 </ProgressBar>
             </div>
         )
     }
 }
+
 
 const mapStateToProps = state => {
     return {
@@ -158,8 +157,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateProgress: (type) => {
-            dispatch(updateProgresBar(type));
+        updateProgress: (msg) => {
+            // debugger
+            dispatch(updateProgresBar(msg));
         }
     };
 };

@@ -6,9 +6,9 @@ export const UPDATE_DELIVERING = '[PROGRESS_BAR] updateDelivering'
 export const UPDATE_DELIVERED = '[PROGRESS_BAR] updateDeliverd'
 
 
-export const updateProgresBar = (type) => {
+export const updateProgresBar = (stage) => {
     const action = {
-        type
+        type: stage
     };
 
     return action;
