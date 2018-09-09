@@ -32,7 +32,7 @@ class LoginComponent extends React.Component {
 
     render() {
         return (
-            <div className="Login">
+            <div className="Login" style={loginStyle}>
                 <form>
                     <FormGroup controlId="username" bsSize="small">
                         <ControlLabel>Username</ControlLabel>
@@ -63,6 +63,12 @@ class LoginComponent extends React.Component {
         );
     }
 }
+
+var loginStyle = {
+    width: '200px',
+    padding: '20px',
+    margin: 'auto'
+};
 
 const mapStateToProps = state => {
     return {

@@ -42,8 +42,10 @@ class Order extends Component {
 
     render() {
         return (
-            <div>
+            <div className="Order">
+                <h2 style={{padding: '20px'}}>Place your Order</h2>
                 <Form handleFormSubmit={this.handleFormSubmit.bind(this)} disable={this.state.formDisable}/>
+                <hr/>
                 { this.state.bar ?
                     <ProgrssBar
                         order_id={this.state.order_id}
@@ -62,6 +64,9 @@ class Order extends Component {
         )
     }
 }
+
+
+
 
 export default Order
 

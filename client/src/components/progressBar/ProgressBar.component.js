@@ -100,18 +100,23 @@ class ReactProgressBar extends React.Component {
                         switch (response.data.state) {
                             case 'Preparing':
                                 that.props.updateProgress(UPDATE_PREPERING)
+                                that.preparingBar()
                                 break
                             case 'Baking':
                                 that.props.updateProgress(UPDATE_BAKING)
+                                that.bakingBar()
                                 break
                             case 'Packaging':
                                 that.props.updateProgress(UPDATE_PACKAGING)
+                                that.packagingBar()
                                 break
                             case 'Delivering':
                                 that.props.updateProgress(UPDATE_DELIVERING)
+                                that.deliveringBar()
                                 break
                             case 'Delivered':
                                 that.props.updateProgress(UPDATE_DELIVERED)
+                                that.deliveredBar()
                                 break
                         }
                     } else {
@@ -134,14 +139,14 @@ class ReactProgressBar extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="Progress" style={{padding: '20px'}}>
                 <ProgressBar>
                     <ProgressBar active={this.state.processing.active} striped bsStyle={this.state.processing.style} now={this.state.processing.complete} key={1} label={this.state.processing.label} />
                     <ProgressBar active={this.state.preparing.active} striped bsStyle={this.state.preparing.style} now={this.state.preparing.complete} key={2} label={this.state.preparing.label}/>
                     <ProgressBar active={this.state.baking.active} striped bsStyle={this.state.baking.style} now={this.state.baking.complete} key={3} label={this.state.baking.label} />
                     <ProgressBar active={this.state.packaging.active} striped bsStyle={this.state.packaging.style} now={this.state.packaging.complete} key={4} label={this.state.packaging.label} />
                     <ProgressBar active={this.state.delivering.active} striped bsStyle={this.state.delivering.style} now={this.state.delivering.complete} key={5} label={this.state.delivering.label} />
-                    <ProgressBarSegment label={"prepering"} />
+                    {/*<ProgressBarSegment label={"prepering"} />*/}
                 </ProgressBar>
             </div>
         )

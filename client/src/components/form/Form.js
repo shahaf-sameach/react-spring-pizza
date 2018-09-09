@@ -45,8 +45,8 @@ export default class ReactForm extends React.Component {
 
     render() {
         return(
-            <form className='react-form' onSubmit={this.handleSubmit}>
-                <h2>Place your Order</h2>
+            <form style={formStyle} className='react-form' onSubmit={this.handleSubmit}>
+
 
                 <FormGroup controlId="type" bsSize="small">
                     <ControlLabel>Type</ControlLabel>
@@ -89,4 +89,9 @@ export default class ReactForm extends React.Component {
         )
     }
 }
+
+var formStyle = {
+    width: '200px',
+    padding: '20px'
+};
 
