@@ -1,10 +1,12 @@
 import React from "react";
-import { ProgressBar } from 'react-bootstrap';
-import axios from "axios";
 import {connect} from "react-redux";
-import {updateProgresBar} from "./progressBar.actions";
-import {UPDATE_PROCESSING, UPDATE_PREPERING, UPDATE_BAKING, UPDATE_PACKAGING, UPDATE_DELIVERING, UPDATE_DELIVERED} from './progressBar.actions'
-import routes from "../../routes";
+import axios from "axios";
+import { push } from "connected-react-router";
+
+import { ProgressBar } from 'react-bootstrap';
+import { updateProgresBar } from "./progressBar.actions";
+import { updateButtonDisable, updateButtonLabel } from '../form/OrderForm.actions'
+import { UPDATE_PREPERING, UPDATE_BAKING, UPDATE_PACKAGING, UPDATE_DELIVERING, UPDATE_DELIVERED } from './progressBar.actions'
 
 
 class ReactProgressBar extends React.Component {
@@ -89,6 +91,7 @@ class ReactProgressBar extends React.Component {
         this.deliveredBar()
         this.stopPulling()
         this.props.handleOrderDeliverd()
+        this.props.updateDone()
     }
 
     getStatus () {
@@ -116,11 +119,11 @@ class ReactProgressBar extends React.Component {
                                 break
                             case 'Delivered':
                                 that.props.updateProgress(UPDATE_DELIVERED)
-                                that.deliveredBar()
+                                that.done()
                                 break
                         }
                     } else {
-                        console.log('redirect')
+                        that.props.backToLogin()
                     }
                 })
                 .catch(function (error) {
@@ -156,15 +159,22 @@ class ReactProgressBar extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        progress: state.ProgressReducer
+        progressState: state.ProgressReducer
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         updateProgress: (msg) => {
-            // debugger
             dispatch(updateProgresBar(msg));
+        },
+
+        updateDone: () => {
+            dispatch(updateButtonLabel("New Order"))
+            dispatch(updateButtonDisable(false))
+        },
+        backToLogin: () => {
+            dispatch(push('/login'))
         }
     };
 };

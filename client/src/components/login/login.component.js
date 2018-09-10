@@ -23,7 +23,7 @@ class LoginComponent extends React.Component {
         // debugger
         if (this.props.loginView.username == "user" &&
             this.props.loginView.password == "1234") {
-            this.props.changePage()
+            this.props.changePageToOrder()
         }
         else {
             this.setState({showWrongCredsMessage: true})
@@ -86,7 +86,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(updatePassword(e.target.value));
         },
 
-        changePage: () => {
+        changePageToOrder: () => {
             dispatch(push('/order'))
         }
     };

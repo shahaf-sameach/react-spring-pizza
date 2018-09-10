@@ -1,35 +1,23 @@
 import React from "react";
 import axios from "axios";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import {updateLocation, updatePizzaType} from "./OrderForm.actions";
+import {push} from "connected-react-router";
+import {connect} from "react-redux";
 
 
-export default class ReactForm extends React.Component {
+class OrderFormButton extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            type: '0',
-            location: '0'
-        }
-
-        this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleChange = (e) => {
-        let newState = {}
-        newState[e.target.name] = e.target.value
-        this.setState(newState, () => console.log(this.state))
-    }
-
-
-
     handleSubmit = (e) => {
         e.preventDefault();
-        let { type, location } = this.state;
-        console.log(this.state)
+        let { username, location } = this.props.orderFormState;
         var that = this;
-        axios.post('http://localhost:8080/api/order/create', {type, location})
+        axios.post('http://localhost:8080/api/order/create', {type: username, location})
         .then(function (response) {
             if (response.status == 200) {
                 that.props.handleFormSubmit(response.data.id)
@@ -46,16 +34,14 @@ export default class ReactForm extends React.Component {
     render() {
         return(
             <form style={formStyle} className='react-form' onSubmit={this.handleSubmit}>
-
-
                 <FormGroup controlId="type" bsSize="small">
                     <ControlLabel>Type</ControlLabel>
                     <FormControl
                         componentClass="select"
                         name="type"
-                        value={this.state.type}
+                        value={this.props.orderFormState.username}
                         disabled={this.props.disable}
-                        onChange={this.handleChange}>
+                        onChange={(e) => this.props.updateType(e)}>
                         <option value="0">Margarita</option>
                         <option value="1">Pomodoro</option>
                         <option value="2">Peperoni</option>
@@ -68,9 +54,9 @@ export default class ReactForm extends React.Component {
                     <FormControl
                         componentClass="select"
                         name="location"
-                        value={this.state.location}
+                        value={this.props.orderFormState.location}
                         disabled={this.props.disable}
-                        onChange={this.handleChange}>
+                        onChange={(e) => this.props.updateLocation(e)}>
                         <option value="0">Nordau</option>
                         <option value="1">Allenby</option>
                         <option value="2">Dizengoff</option>
@@ -90,8 +76,7 @@ export default class ReactForm extends React.Component {
     }
 }
 
-var formStyle = {
-    width: '200px',
-    padding: '20px'
-};
+
+export default OrderFormButton;
+
 

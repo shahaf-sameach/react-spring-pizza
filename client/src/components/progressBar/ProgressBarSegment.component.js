@@ -30,7 +30,7 @@ class ReactProgressBarSegment extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        progress: state.ProgressReducer
+        progressState: state.ProgressReducer
     };
 };
 
