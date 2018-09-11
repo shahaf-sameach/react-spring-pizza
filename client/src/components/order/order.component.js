@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import Form from "../form/OrderForm.component"
+import Form from "../orderForm/OrderForm.component"
 import ReactProgressBar from '../progressBar/ProgressBar.component'
 import {connect} from "react-redux";
 import {
@@ -8,60 +8,41 @@ import {
     updateFormDisabled,
     updateLocation,
     updatePizzaType
-} from "../form/OrderForm.actions";
+} from "../orderForm/OrderForm.actions";
 import {push} from "connected-react-router";
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 
 class OrderComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            order_id: '',
-            bar: false,
-            formDisable: false
-        }
+        this.state = { order_id: null }
 
-        this.toggleForm = this.toggleForm.bind(this);
     }
 
-    toggleForm() {
-        this.setState(state => ({
-            formDisable: !state.formDisable,
-            bar: false,
-            new_order: false
-        }));
-    }
 
     handleFormSubmit(order_id) {
         this.setState({order_id})
-        this.setState({bar: true})
-        this.setState({formDisable: true})
-    }
-
-    handleOrderDeliverd() {
-        this.setState({new_order : true})
-    }
-
-    newOrderClick (e) {
-        e.preventDefault();
-        this.setState({bar: false})
-        this.setState({new_order: false})
-        this.setState({formDisable: false})
     }
 
     render() {
         return (
+            <div>
+            <Header/>
             <div className="Order">
+
                 <h2 style={{padding: '20px'}}>Place your Order</h2>
                 <Form handleFormSubmit={this.handleFormSubmit.bind(this)} />
                 <hr/>
                 { this.props.orderState.progressVisible ?
-                    <ReactProgressBar
-                        order_id={this.state.order_id}
-                        handleOrderDeliverd={this.handleOrderDeliverd.bind(this)}/>
-                    : null
+                    <ReactProgressBar order_id={this.state.order_id}/> : null
                 }
+
+            </div>
+            <Footer />
             </div>
         )
+
     }
 }
 

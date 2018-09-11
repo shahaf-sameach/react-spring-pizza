@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import axios from "axios";
 import { push } from 'connected-react-router'
 import {Button, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import {updatePassword, updateUsername} from './login.actions';
@@ -13,6 +14,8 @@ class LoginComponent extends React.Component {
             password: "",
             showWrongCredsMessage: false
         };
+
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     validateForm() {
@@ -20,14 +23,23 @@ class LoginComponent extends React.Component {
     }
 
     handleSubmit = () => {
-        // debugger
-        if (this.props.loginView.username == "user" &&
-            this.props.loginView.password == "1234") {
-            this.props.changePageToOrder()
-        }
-        else {
-            this.setState({showWrongCredsMessage: true})
-        }
+        var that = this
+        let {username, password} = this.props.loginView
+        axios({
+            method:'post',
+            url:'/api/login',
+            auth: {username, password}
+        }).then(function (response) {
+            if (response.status == 200) {
+                that.props.changePageToOrder()
+            }
+            else {
+                console.log(response);
+            }
+        }).catch(function (error) {
+            that.setState({showWrongCredsMessage: true})
+            console.log(error);
+        });
     }
 
     render() {

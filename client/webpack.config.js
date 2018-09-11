@@ -12,11 +12,11 @@ module.exports = {
         compress: true,
         hot: true,
         port: 9000,
-        // proxy: {
-        //     '/api': 'http://localhost:8080',
-        //     changeOrigin: true,
-        //     context: () => true
-        // }
+        proxy: {
+            '/api': 'http://localhost:8080',
+            // context: () => true,
+            // changeOrigin: true
+        }
     },
     module: {
         loaders: [
