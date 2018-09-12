@@ -29,28 +29,12 @@ public class OrderRepository {
         return orders.get(id);
     }
 
-    public OrderState getState(long id){
-        Order order = orders.get(id);
-
-        if (order == null)
-            return null;
-
-        return order.getState();
-
-    }
-
-    synchronized public long setState(long id, OrderState state){
-        Order order = orders.get(id);
-
-        if ((order == null) || (order.getState() == OrderState.Delivered))
-            return -1;
-
-        order.setState(state);
-        return id;
-    }
-
-
     public Collection<Order> getAll() {
         return this.orders.values();
+    }
+
+    public void clear() {
+        orders.clear();
+        lastId = 0;
     }
 }

@@ -10,4 +10,4 @@ export const reducers = combineReducers({
     loginReducer,
     OrderFormReducer,
     OrderReducer
-    });
+});

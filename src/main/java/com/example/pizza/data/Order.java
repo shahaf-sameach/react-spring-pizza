@@ -18,7 +18,7 @@ public class Order {
     private long stateTimeStamp;
 
     public Order() {
-
+        this(Location.Allenby, PizzaType.Margarita);
     }
 
     public Order(Location location, PizzaType type) {

@@ -21,7 +21,6 @@ public class Worker implements Runnable {
         try {
             logger.info("starting " + order.getState().name() +" order " + order.getId() + " ...");
             Thread.sleep(this.duration * 1000);
-
             if (order.getState() == OrderState.Baking)
                 order.setState(OrderState.Packaging);
             else if (order.getState() == OrderState.Delivering)
