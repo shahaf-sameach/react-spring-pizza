@@ -2,7 +2,7 @@ import {UPDATE_USERNAME, UPDATE_PASSWORD} from './login.action-types';
 
 const initialState = {
     username: 'user',
-    password: '1234'
+    password: 'password'
 };
 
 const updateUsername = (state, action) => {
