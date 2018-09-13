@@ -12,7 +12,7 @@ import { UPDATE_INIT, UPDATE_PROCESSING, UPDATE_PREPARING, UPDATE_BAKING, UPDATE
 class ReactProgressBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {pull: true}
+        this.state.pull = true
         this.state.labels = ['Processing','Preparing', 'Baking', 'Packaging', 'Delivering']
 
         this.done = this.done.bind(this)
@@ -28,7 +28,7 @@ class ReactProgressBar extends React.Component {
     getStatus () {
         var that = this
         if (this.state.pull) {
-            axios.get('http://localhost:8080/api/order/get', {params: {id: this.props.order_id}})
+            axios.get('/api/order/get', {params: {id: this.props.order_id}})
                 .then(function (response) {
                     if (response.status == 200) {
                         switch (response.data.state) {
